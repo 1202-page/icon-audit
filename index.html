@@ -680,7 +680,7 @@
     <div class="step-card" onclick="selectStep(1)">
       <div class="step-idx">Step 02</div>
       <div class="step-name">Figma 정리</div>
-      <div class="step-sub">미사용 135개 삭제, 이름 불일치 통일, Material Icons 전면 적용</div>
+      <div class="step-sub">미사용 135개 삭제, Material Icons 일괄 적용, 중복 아이콘 병합</div>
       <span class="step-badge badge-wip">진행 중</span>
     </div>
     <div class="step-card" onclick="selectStep(2)">
@@ -938,11 +938,9 @@ const stepData = [
   },
   {
     items: [
-      { dot:'r', strong:'할 일', text:'— 바로 삭제 128개: 서비스 완전 미사용, 즉시 제거 가능' },
-      { dot:'a', strong:'확인 후 삭제', text:'— 이름 불일치 9건: Figma에서 실제 모양 비교 후 판단' },
-      { dot:'b', strong:'이름 통일', text:'— 코드명 vs Figma명 기준 합의 후 통일' },
-      { dot:'g', strong:'라이브러리 확정', text:'— Material Icons 단일 라이브러리로 전면 적용 (모바일 확장성 고려)' },
-      { dot:'x', strong:'Figma 작업', text:'— Material Icons Figma 플러그인 설치 및 컴포넌트 세팅' },
+      { dot:'r', strong:'미사용 135개 삭제', text:'— 서비스 코드에서 완전 미사용 확인, Figma에서 제거' },
+      { dot:'g', strong:'Material Icons 일괄 적용 및 교체', text:'— 실서버 사용 아이콘 160개 대상으로 Material Icons 전면 교체' },
+      { dot:'b', strong:'중복/유사 아이콘 병합', text:'— 싱크로율 90% 이상 아이콘 병합 및 네이밍 단일화 작업' },
     ]
   },
   {
