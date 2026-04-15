@@ -680,13 +680,13 @@
     <div class="step-card" onclick="selectStep(1)">
       <div class="step-idx">Step 02</div>
       <div class="step-name">Figma 정리</div>
-      <div class="step-sub">미사용 135개 삭제, 이름 불일치 통일</div>
+      <div class="step-sub">미사용 135개 삭제, 이름 불일치 통일, Material Icons 전면 적용</div>
       <span class="step-badge badge-wip">진행 중</span>
     </div>
     <div class="step-card" onclick="selectStep(2)">
       <div class="step-idx">Step 03</div>
-      <div class="step-name">라이브러리 교체</div>
-      <div class="step-sub">단일 라이브러리로 전면 통일</div>
+      <div class="step-name">아이콘 명 교체</div>
+      <div class="step-sub">AI 친화적인 아이콘 명으로 전면 교체</div>
       <span class="step-badge badge-todo">예정</span>
     </div>
     <div class="step-card" onclick="selectStep(3)">
@@ -828,13 +828,23 @@
     <h2 class="section-title">라이브러리 선택 가이드</h2>
   </div>
 
+  <div style="margin-bottom:28px; background:rgba(200,184,154,0.07); border:1px solid rgba(200,184,154,0.25); border-radius:12px; padding:24px 28px;">
+    <div style="font-family:var(--mono); font-size:10px; color:var(--accent); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:12px;">결론</div>
+    <div style="font-size:17px; font-weight:500; letter-spacing:-0.01em; margin-bottom:10px;">Material Icons 적용</div>
+    <div style="font-size:13px; color:var(--text2); line-height:1.8; font-weight:300;">
+      모바일까지의 확장성을 고려하여 Material Icons를 단일 라이브러리로 채택합니다.<br>
+      네이밍 일관성 문제는 내부적으로 사용 원칙을 수립하면 충분히 커버 가능한 것으로 판단합니다.
+    </div>
+  </div>
+
   <div class="lib-grid">
-    <div class="lib-card">
+    <div class="lib-card recommended">
       <div class="lib-header">
         <div>
           <div class="lib-name">Material Icons</div>
           <div class="lib-sub">Google — 2,000+ 아이콘 — Apache 2.0</div>
         </div>
+        <span class="rec-badge">최종 선택</span>
       </div>
       <div class="lib-rows">
         <div class="lib-row"><span class="lib-key">아이콘 수</span><span class="lib-val good">2,000개+</span></div>
@@ -847,13 +857,12 @@
       </div>
     </div>
 
-    <div class="lib-card recommended">
+    <div class="lib-card">
       <div class="lib-header">
         <div>
           <div class="lib-name">Lucide Icons</div>
           <div class="lib-sub">커뮤니티 — 1,500+ 아이콘 — ISC</div>
         </div>
-        <span class="rec-badge">B2B 추천</span>
       </div>
       <div class="lib-rows">
         <div class="lib-row"><span class="lib-key">아이콘 수</span><span class="lib-val warn">1,500개+</span></div>
@@ -931,27 +940,26 @@ const stepData = [
     items: [
       { dot:'r', strong:'할 일', text:'— 바로 삭제 128개: 서비스 완전 미사용, 즉시 제거 가능' },
       { dot:'a', strong:'확인 후 삭제', text:'— 이름 불일치 9건: Figma에서 실제 모양 비교 후 판단' },
-      { dot:'b', strong:'이름 통일', text:'— 코드명 vs Figma명 어느 쪽 기준으로 통일할지 개발자와 합의' },
-      { dot:'x', strong:'정리', text:'— system_tooltip1/2/3 용도 확인 및 처리 방향 결정' },
-      { dot:'x', strong:'정리', text:'— system_more_2 vs system_morev2 실제 다른 아이콘인지 확인' },
+      { dot:'b', strong:'이름 통일', text:'— 코드명 vs Figma명 기준 합의 후 통일' },
+      { dot:'g', strong:'라이브러리 확정', text:'— Material Icons 단일 라이브러리로 전면 적용 (모바일 확장성 고려)' },
+      { dot:'x', strong:'Figma 작업', text:'— Material Icons Figma 플러그인 설치 및 컴포넌트 세팅' },
     ]
   },
   {
     items: [
-      { dot:'b', strong:'결정 필요', text:'— B2B → Lucide Icons / B2C+모바일 → Material Icons 중 선택' },
-      { dot:'b', strong:'규칙 수립', text:'— 허용 스타일 1가지로 제한 (Material이면 Outlined만 허용 등)' },
-      { dot:'a', strong:'개발자 협의', text:'— 번들 사이즈, React Native 지원 여부, 마이그레이션 범위 확인' },
-      { dot:'x', strong:'Figma 작업', text:'— 선택한 라이브러리 Figma 플러그인 설치 및 컴포넌트 세팅' },
-      { dot:'x', strong:'문서화', text:'— 아이콘 사용 가이드라인 Notion 또는 Figma에 정리' },
+      { dot:'b', strong:'아이콘 명 전면 교체', text:'— AI 툴이 잘 인식하는 Material Icons 네이밍 체계로 전환' },
+      { dot:'b', strong:'네이밍 원칙 수립', text:'— 내부 컨벤션 문서화 (스타일 통일: Outlined 기본, Filled 활성 상태)' },
+      { dot:'a', strong:'매핑 테이블 작성', text:'— 기존 아이콘명 → Material 아이콘명 1:1 대응표 제작' },
+      { dot:'x', strong:'가이드라인 배포', text:'— 개발자·디자이너 공유용 아이콘 사용 가이드 완성' },
     ]
   },
   {
     items: [
-      { dot:'b', strong:'매핑 테이블', text:'— 현재 아이콘명 → 새 라이브러리 아이콘명 1:1 대응표 작성' },
+      { dot:'b', strong:'매핑 테이블', text:'— 현재 아이콘명 → Material Icons 아이콘명 1:1 대응표 작성' },
       { dot:'b', strong:'단계적 교체', text:'— 사용 빈도 높은 아이콘부터 (system_search, system_close 우선)' },
       { dot:'a', strong:'컴포넌트 정리', text:'— JDS Core + BZW 중복 11개 단일 컴포넌트로 통합' },
       { dot:'x', strong:'테스트', text:'— 교체 후 각 페이지 시각 회귀 테스트 진행' },
-      { dot:'g', strong:'완료 기준', text:'— 단일 라이브러리, 이름 일관성, Figma ↔ 코드 1:1 매핑 문서 완성' },
+      { dot:'g', strong:'완료 기준', text:'— Material Icons 단일 적용, 네이밍 일관성, Figma ↔ 코드 1:1 매핑 문서 완성' },
     ]
   }
 ];
