@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIZ Jams — 아이콘 전면 교체 프로젝트</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Pretendard:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --bg2: #131316;
+    --bg3: #1a1a1f;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #e8e6e0;
+    --text2: #888580;
+    --text3: #4a4845;
+    --accent: #c8b89a;
+    --accent2: #8fa0b4;
+    --red: #d45f5f;
+    --amber: #c4853a;
+    --green: #6aaa7a;
+    --blue: #5a88c4;
+    --mono: 'DM Mono', monospace;
+    --sans: 'Pretendard', -apple-system, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(13,13,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+    padding: 0 40px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-brand {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text2);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 0.03em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    padding: 140px 40px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.1s forwards;
+  }
+
+  .hero-title {
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.2s forwards;
+  }
+
+  .hero-title em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .hero-desc {
+    font-size: 16px;
+    color: var(--text2);
+    max-width: 560px;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.3s forwards;
+    font-weight: 300;
+  }
+
+  .hero-meta {
+    margin-top: 40px;
+    display: flex;
+    gap: 32px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.4s forwards;
+  }
+
+  .hero-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .meta-val {
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-family: var(--mono);
+  }
+
+  .meta-val.red { color: var(--red); }
+  .meta-val.amber { color: var(--amber); }
+  .meta-val.blue { color: var(--blue); }
+
+  .meta-label {
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* SECTION */
+  .section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 40px;
+    border-top: 0.5px solid var(--border);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .section-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.1em;
+  }
+
+  .section-title {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  /* STEPS */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .step-card {
+    background: var(--bg2);
+    padding: 28px 24px;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+  }
+
+  .step-card:hover { background: var(--bg3); }
+
+  .step-card.active {
+    background: var(--bg3);
+  }
+
+  .step-card.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  .step-idx {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .step-card.active .step-idx { color: var(--accent); }
+
+  .step-name {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .step-sub {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  .step-badge {
+    display: inline-block;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 99px;
+    margin-top: 12px;
+    font-family: var(--mono);
+    letter-spacing: 0.04em;
+  }
+
+  .badge-done { background: rgba(106,170,122,0.15); color: var(--green); }
+  .badge-wip  { background: rgba(196,133,58,0.15); color: var(--amber); }
+  .badge-todo { background: rgba(255,255,255,0.05); color: var(--text3); }
+
+  .step-detail {
+    margin-top: 1px;
+    background: var(--bg3);
+    border: 0.5px solid var(--border);
+    border-radius: 0 0 12px 12px;
+    padding: 28px 28px 28px;
+    display: none;
+  }
+
+  .step-detail.visible { display: block; }
+
+  .detail-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .detail-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px 14px;
+    background: var(--bg2);
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .detail-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+  .dot-g { background: var(--green); }
+  .dot-a { background: var(--amber); }
+  .dot-b { background: var(--blue); }
+  .dot-r { background: var(--red); }
+  .dot-x { background: var(--text3); }
+
+  .detail-item b { font-weight: 500; color: var(--text); }
+  .detail-item span { color: var(--text2); }
+
+  /* CHARTS */
+  .charts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .chart-card {
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  .chart-title {
+    font-size: 11px;
+    color: var(--text2);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-family: var(--mono);
+  }
+
+  .bar-rows { display: flex; flex-direction: column; gap: 10px; }
+
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .bar-label {
+    font-size: 12px;
+    color: var(--text2);
+    width: 120px;
+    flex-shrink: 0;
+    font-family: var(--mono);
+  }
+
+  .bar-track {
+    flex: 1;
+    height: 6px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 99px;
+    transition: width 1.2s cubic-bezier(.4,0,.2,1);
+  }
+
+  .bar-val {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    min-width: 28px;
+    text-align: right;
+  }
+
+  .fill-blue { background: var(--blue); }
+  .fill-amber { background: var(--amber); }
+  .fill-red { background: var(--red); }
+  .fill-green { background: var(--green); }
+  .fill-muted { background: var(--text3); }
+
+  /* ISSUES TABLE */
+  .issues-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .issue-card {
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+  }
+
+  .issue-card:first-child {
+    border-color: rgba(212,95,95,0.3);
+    background: rgba(212,95,95,0.04);
+  }
+
+  .issue-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .tag-red { color: var(--red); }
+  .tag-amber { color: var(--amber); }
+  .tag-blue { color: var(--blue); }
+
+  .issue-title {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .issue-desc {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .issue-count {
+    font-family: var(--mono);
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  /* MISMATCH TABLE */
+  .table-wrap {
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  table { width: 100%; border-collapse: collapse; }
+
+  thead tr {
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  th {
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-family: var(--mono);
+    font-weight: 400;
+  }
+
+  td {
+    padding: 11px 16px;
+    font-size: 12px;
+    color: var(--text2);
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover td { background: rgba(255,255,255,0.02); color: var(--text); }
+
+  .code {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 2px 6px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+    color: var(--accent);
+  }
+
+  .code.red {
+    background: rgba(212,95,95,0.1);
+    color: var(--red);
+  }
+
+  /* LIBRARY COMPARISON */
+  .lib-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .lib-card {
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  .lib-card.recommended {
+    border-color: rgba(200,184,154,0.3);
+    background: rgba(200,184,154,0.04);
+  }
+
+  .lib-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .lib-name {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .lib-sub { font-size: 12px; color: var(--text2); }
+
+  .rec-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 4px 10px;
+    background: rgba(200,184,154,0.15);
+    color: var(--accent);
+    border-radius: 99px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .lib-rows { display: flex; flex-direction: column; gap: 8px; }
+
+  .lib-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 0.5px solid var(--border);
+    font-size: 12px;
+  }
+
+  .lib-row:last-child { border-bottom: none; }
+  .lib-key { color: var(--text2); }
+  .lib-val { font-weight: 500; }
+  .lib-val.good { color: var(--green); }
+  .lib-val.bad { color: var(--red); }
+  .lib-val.warn { color: var(--amber); }
+
+  /* ENV TABLE */
+  .env-table-wrap {
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .env-table { width: 100%; border-collapse: collapse; }
+
+  .env-table th {
+    background: var(--bg3);
+    padding: 12px 20px;
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .env-table td {
+    padding: 14px 20px;
+    font-size: 13px;
+    color: var(--text2);
+    border-bottom: 0.5px solid var(--border);
+    vertical-align: top;
+  }
+
+  .env-table tbody tr:last-child td { border-bottom: none; }
+  .env-table tbody tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .env-rec {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+    font-size: 13px;
+  }
+
+  .env-rec.lucide { color: var(--accent2); }
+  .env-rec.material { color: var(--accent); }
+
+  .check { color: var(--green); }
+  .cross { color: var(--red); }
+
+  /* FOOTER */
+  footer {
+    border-top: 0.5px solid var(--border);
+    padding: 40px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text3);
+    font-family: var(--mono);
+  }
+
+  footer span { color: var(--text2); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 20px 60px; }
+    .hero-meta { flex-wrap: wrap; gap: 20px; }
+    .section { padding: 60px 20px; }
+    .steps-grid { grid-template-columns: 1fr 1fr; }
+    .charts-grid { grid-template-columns: 1fr; }
+    .issues-grid { grid-template-columns: 1fr; }
+    .lib-grid { grid-template-columns: 1fr; }
+    footer { padding: 32px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">BIZ Jams — Icon Audit</div>
+  <ul class="nav-links">
+    <li><a href="#overview">개요</a></li>
+    <li><a href="#steps">작업 단계</a></li>
+    <li><a href="#issues">이슈</a></li>
+    <li><a href="#library">라이브러리</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-label">Icon System Audit — 2026.04</p>
+  <h1 class="hero-title">아이콘 시스템<br><em>전면 교체</em> 프로젝트</h1>
+  <p class="hero-desc">
+    서비스 코드베이스 실사용 아이콘 160개와 Figma 디자인 시스템을 교차 분석하여,
+    중복·미사용·이름 불일치 문제를 해소하고 단일 라이브러리로 통일합니다.
+  </p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="meta-val">160</span>
+      <span class="meta-label">서비스 사용 아이콘</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="meta-val red">135</span>
+      <span class="meta-label">Figma 삭제 대상</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="meta-val amber">15</span>
+      <span class="meta-label">이름 불일치</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="meta-val blue">11</span>
+      <span class="meta-label">JDS+BZW 중복</span>
+    </div>
+  </div>
+</div>
+
+<!-- STEPS -->
+<section class="section reveal" id="steps">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">작업 단계</h2>
+  </div>
+  <div class="steps-grid" id="stepsGrid">
+    <div class="step-card active" onclick="selectStep(0)">
+      <div class="step-idx">Step 01</div>
+      <div class="step-name">현황 파악</div>
+      <div class="step-sub">코드 vs Figma 인벤토리 교차 비교 완료</div>
+      <span class="step-badge badge-done">완료</span>
+    </div>
+    <div class="step-card" onclick="selectStep(1)">
+      <div class="step-idx">Step 02</div>
+      <div class="step-name">Figma 정리</div>
+      <div class="step-sub">미사용 135개 삭제, 이름 불일치 통일</div>
+      <span class="step-badge badge-wip">진행 중</span>
+    </div>
+    <div class="step-card" onclick="selectStep(2)">
+      <div class="step-idx">Step 03</div>
+      <div class="step-name">라이브러리 교체</div>
+      <div class="step-sub">단일 라이브러리로 전면 통일</div>
+      <span class="step-badge badge-todo">예정</span>
+    </div>
+    <div class="step-card" onclick="selectStep(3)">
+      <div class="step-idx">Step 04</div>
+      <div class="step-name">코드 마이그레이션</div>
+      <div class="step-sub">서비스 코드 아이콘명 일괄 교체</div>
+      <span class="step-badge badge-todo">예정</span>
+    </div>
+  </div>
+  <div class="step-detail visible" id="stepDetail">
+    <div class="detail-items" id="detailItems"></div>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section class="section reveal" id="overview">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">아이콘 구성 현황</h2>
+  </div>
+  <div class="charts-grid">
+    <div class="chart-card">
+      <div class="chart-title">서비스 사용 아이콘 구성 (160개)</div>
+      <div class="bar-rows">
+        <div class="bar-row">
+          <div class="bar-label">BZW System</div>
+          <div class="bar-track"><div class="bar-fill fill-blue" style="width:0%" data-w="61%"></div></div>
+          <div class="bar-val">97</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">JDS Core</div>
+          <div class="bar-track"><div class="bar-fill fill-muted" style="width:0%" data-w="20%"></div></div>
+          <div class="bar-val">32</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">BZW Special</div>
+          <div class="bar-track"><div class="bar-fill fill-amber" style="width:0%" data-w="19%"></div></div>
+          <div class="bar-val">31</div>
+        </div>
+        <div class="bar-row" style="margin-top:8px; padding-top:8px; border-top:0.5px solid var(--border)">
+          <div class="bar-label" style="color:var(--red)">JDS+BZW 중복</div>
+          <div class="bar-track"><div class="bar-fill fill-red" style="width:0%" data-w="7%"></div></div>
+          <div class="bar-val" style="color:var(--red)">11</div>
+        </div>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Figma 삭제 대상 (135개)</div>
+      <div class="bar-rows">
+        <div class="bar-row">
+          <div class="bar-label">바로 삭제 가능</div>
+          <div class="bar-track"><div class="bar-fill fill-red" style="width:0%" data-w="95%"></div></div>
+          <div class="bar-val">128</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">확인 후 삭제</div>
+          <div class="bar-track"><div class="bar-fill fill-amber" style="width:0%" data-w="7%"></div></div>
+          <div class="bar-val">9</div>
+        </div>
+      </div>
+      <div style="margin-top:20px; padding-top:16px; border-top:0.5px solid var(--border)">
+        <div class="chart-title" style="margin-bottom:10px">렌더링 방식 혼재</div>
+        <div class="bar-rows">
+          <div class="bar-row">
+            <div class="bar-label">SVG 컴포넌트</div>
+            <div class="bar-track"><div class="bar-fill fill-blue" style="width:0%" data-w="80%"></div></div>
+            <div class="bar-val">129</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">CSS 기반 (i 태그)</div>
+            <div class="bar-track"><div class="bar-fill fill-amber" style="width:0%" data-w="20%"></div></div>
+            <div class="bar-val">31</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ISSUES -->
+<section class="section reveal" id="issues">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">주요 이슈</h2>
+  </div>
+  <div class="issues-grid" style="margin-bottom:24px">
+    <div class="issue-card">
+      <div class="issue-tag tag-red">Critical</div>
+      <div class="issue-count" style="color:var(--red)">135</div>
+      <div class="issue-title">Figma 미사용 아이콘</div>
+      <div class="issue-desc">코드에서 전혀 사용하지 않는 아이콘이 Figma에 혼재. 128개는 즉시 삭제 가능, 9개는 이름 불일치 확인 필요.</div>
+    </div>
+    <div class="issue-card">
+      <div class="issue-tag tag-amber">Warning</div>
+      <div class="issue-count" style="color:var(--amber)">15</div>
+      <div class="issue-title">이름 불일치</div>
+      <div class="issue-desc">코드명과 Figma명이 달라 동일 아이콘인지 판단이 어려운 케이스. 디자이너와 개발자가 함께 육안 확인 필요.</div>
+    </div>
+    <div class="issue-card">
+      <div class="issue-tag tag-blue">Info</div>
+      <div class="issue-count" style="color:var(--blue)">11</div>
+      <div class="issue-title">JDS + BZW 중복</div>
+      <div class="issue-desc">동일한 이름의 아이콘이 JDS Core와 BZW 두 컴포넌트에서 동시에 사용 중. 컴포넌트 통일 필요.</div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:16px; font-size:11px; color:var(--text3); font-family:var(--mono); letter-spacing:0.08em; text-transform:uppercase;">이름 불일치 주요 사례</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>코드(.md) 이름</th>
+          <th>Figma 이름</th>
+          <th>유형</th>
+          <th>조치</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="code">system_delete</span></td><td><span class="code">system_trash</span></td><td><span style="color:var(--red)">완전 다른 이름</span></td><td>코드 또는 Figma 이름 통일</td></tr>
+        <tr><td><span class="code">system_close</span></td><td><span class="code">system_xo</span></td><td><span style="color:var(--red)">완전 다른 이름</span></td><td>육안 확인 후 통일</td></tr>
+        <tr><td><span class="code">system_modify</span></td><td><span class="code">system_edit</span></td><td><span style="color:var(--red)">완전 다른 이름</span></td><td>코드 또는 Figma 이름 통일</td></tr>
+        <tr><td><span class="code">system_redo</span></td><td><span class="code">system_reload</span></td><td><span style="color:var(--red)">완전 다른 이름</span></td><td>코드 또는 Figma 이름 통일</td></tr>
+        <tr><td><span class="code">system_plus_circle</span></td><td><span class="code">system_add_circle</span></td><td><span style="color:var(--red)">완전 다른 이름</span></td><td>코드 또는 Figma 이름 통일</td></tr>
+        <tr><td><span class="code">system_arrow_up</span></td><td><span class="code">system_arrowupo</span></td><td><span style="color:var(--amber)">스네이크케이스 불일치</span></td><td>네이밍 컨벤션 수립</td></tr>
+        <tr><td><span class="code">system_thumbs_up</span></td><td><span class="code">system_thumbsup</span></td><td><span style="color:var(--amber)">언더스코어 불일치</span></td><td>네이밍 컨벤션 수립</td></tr>
+        <tr><td><span class="code">system_open_in_new</span></td><td><span class="code">system_newtab</span></td><td><span style="color:var(--red)">완전 다른 이름</span></td><td>육안 확인 후 통일</td></tr>
+        <tr><td><span class="code">system_circlecheck</span></td><td><span class="code">system_check_circle</span></td><td><span style="color:var(--amber)">순서 반전</span></td><td>통일 필요</td></tr>
+        <tr><td><span class="code">system_user</span></td><td><span class="code">system_persono</span></td><td><span style="color:var(--red)">완전 다른 이름</span></td><td>육안 확인 후 통일</td></tr>
+        <tr><td><span class="code red">system_tooltip1/2/3</span></td><td>—</td><td><span style="color:var(--red)">Figma에 없음</span></td><td>Figma에 추가 또는 코드 정리</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- LIBRARY -->
+<section class="section reveal" id="library">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">라이브러리 선택 가이드</h2>
+  </div>
+
+  <div class="lib-grid">
+    <div class="lib-card">
+      <div class="lib-header">
+        <div>
+          <div class="lib-name">Material Icons</div>
+          <div class="lib-sub">Google — 2,000+ 아이콘 — Apache 2.0</div>
+        </div>
+      </div>
+      <div class="lib-rows">
+        <div class="lib-row"><span class="lib-key">아이콘 수</span><span class="lib-val good">2,000개+</span></div>
+        <div class="lib-row"><span class="lib-key">스타일 종류</span><span class="lib-val good">5종 (Filled/Outlined/Rounded 등)</span></div>
+        <div class="lib-row"><span class="lib-key">B2C 친숙도</span><span class="lib-val good">매우 높음</span></div>
+        <div class="lib-row"><span class="lib-key">모바일 (React Native)</span><span class="lib-val good">공식 지원</span></div>
+        <div class="lib-row"><span class="lib-key">AI 툴 인지도</span><span class="lib-val warn">있으나 변형 오류 잦음</span></div>
+        <div class="lib-row"><span class="lib-key">네이밍 일관성</span><span class="lib-val bad">변형마다 달라짐</span></div>
+        <div class="lib-row"><span class="lib-key">B2B 디자인 톤</span><span class="lib-val bad">Consumer 느낌 강함</span></div>
+      </div>
+    </div>
+
+    <div class="lib-card recommended">
+      <div class="lib-header">
+        <div>
+          <div class="lib-name">Lucide Icons</div>
+          <div class="lib-sub">커뮤니티 — 1,500+ 아이콘 — ISC</div>
+        </div>
+        <span class="rec-badge">B2B 추천</span>
+      </div>
+      <div class="lib-rows">
+        <div class="lib-row"><span class="lib-key">아이콘 수</span><span class="lib-val warn">1,500개+</span></div>
+        <div class="lib-row"><span class="lib-key">스타일 종류</span><span class="lib-val warn">단일 (strokeWidth 조절)</span></div>
+        <div class="lib-row"><span class="lib-key">B2B 디자인 톤</span><span class="lib-val good">중립적, 깔끔</span></div>
+        <div class="lib-row"><span class="lib-key">AI 툴 인지도</span><span class="lib-val good">Cursor/Copilot 최적</span></div>
+        <div class="lib-row"><span class="lib-key">네이밍 일관성</span><span class="lib-val good">직관적 PascalCase</span></div>
+        <div class="lib-row"><span class="lib-key">TypeScript</span><span class="lib-val good">완벽 지원</span></div>
+        <div class="lib-row"><span class="lib-key">Tree-shaking</span><span class="lib-val good">기본 지원</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="env-table-wrap">
+    <table class="env-table">
+      <thead>
+        <tr>
+          <th>사용 환경</th>
+          <th>추천 라이브러리</th>
+          <th>핵심 이유</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>B2B 웹 서비스</td>
+          <td><span class="env-rec lucide">Lucide Icons</span></td>
+          <td>중립적 톤, AI 툴 친화, 네이밍 일관성</td>
+        </tr>
+        <tr>
+          <td>B2C 웹 서비스</td>
+          <td><span class="env-rec material">Material Icons</span></td>
+          <td>일반 사용자 친숙도, 풍부한 아이콘 수, Filled/Outlined 상태 표현</td>
+        </tr>
+        <tr>
+          <td>모바일 (iOS/Android)</td>
+          <td><span class="env-rec material">Material Icons</span></td>
+          <td>React Native 공식 지원, 터치 최적화, 크로스 플랫폼 일관성</td>
+        </tr>
+        <tr>
+          <td>B2B + AI 개발 환경</td>
+          <td><span class="env-rec lucide">Lucide Icons</span></td>
+          <td>Cursor·Copilot이 이름을 정확히 인식, hallucination 없음</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="margin-top:16px; background:rgba(196,133,58,0.08); border:0.5px solid rgba(196,133,58,0.2); border-radius:10px; padding:16px 20px;">
+    <div style="font-size:11px; color:var(--amber); font-family:var(--mono); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px;">Material Icons 선택 시 필수 규칙</div>
+    <div style="font-size:13px; color:var(--text2); line-height:1.8;">
+      기본 스타일 → <span class="code">Outlined</span> 고정 &nbsp;|&nbsp;
+      선택/활성 상태 → <span class="code">Filled</span> 만 허용 &nbsp;|&nbsp;
+      <span class="code">Rounded</span> · <span class="code">Sharp</span> · <span class="code">Two-tone</span> 사용 금지 &nbsp;|&nbsp;
+      예외 적용 시 디자이너+개발자 합의 후 문서화
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>BIZ Jams Icon Audit</span> — 수집일 2026.04.09 &nbsp;·&nbsp; Figma node: 818-51058 &nbsp;·&nbsp; 서비스 코드 src/ 기준
+</footer>
+
+<script>
+const stepData = [
+  {
+    items: [
+      { dot:'g', strong:'완료', text:'— 서비스 사용 아이콘 160개 목록 확보 (src/ 코드 기준, 테스트 제외)' },
+      { dot:'g', strong:'완료', text:'— Figma systemicon / specialicon 섹션 전수 추출 (노드 818-51058)' },
+      { dot:'g', strong:'완료', text:'— 코드 ↔ Figma 교차 비교 완료, 삭제 대상 135개 확정' },
+      { dot:'a', strong:'확인 필요', text:'— 이름 불일치 15건 육안 확인 (예: system_close ↔ system_xo)' },
+      { dot:'a', strong:'확인 필요', text:'— line_ban / line_caution / line_check Figma 별도 섹션 여부' },
+    ]
+  },
+  {
+    items: [
+      { dot:'r', strong:'할 일', text:'— 바로 삭제 128개: 서비스 완전 미사용, 즉시 제거 가능' },
+      { dot:'a', strong:'확인 후 삭제', text:'— 이름 불일치 9건: Figma에서 실제 모양 비교 후 판단' },
+      { dot:'b', strong:'이름 통일', text:'— 코드명 vs Figma명 어느 쪽 기준으로 통일할지 개발자와 합의' },
+      { dot:'x', strong:'정리', text:'— system_tooltip1/2/3 용도 확인 및 처리 방향 결정' },
+      { dot:'x', strong:'정리', text:'— system_more_2 vs system_morev2 실제 다른 아이콘인지 확인' },
+    ]
+  },
+  {
+    items: [
+      { dot:'b', strong:'결정 필요', text:'— B2B → Lucide Icons / B2C+모바일 → Material Icons 중 선택' },
+      { dot:'b', strong:'규칙 수립', text:'— 허용 스타일 1가지로 제한 (Material이면 Outlined만 허용 등)' },
+      { dot:'a', strong:'개발자 협의', text:'— 번들 사이즈, React Native 지원 여부, 마이그레이션 범위 확인' },
+      { dot:'x', strong:'Figma 작업', text:'— 선택한 라이브러리 Figma 플러그인 설치 및 컴포넌트 세팅' },
+      { dot:'x', strong:'문서화', text:'— 아이콘 사용 가이드라인 Notion 또는 Figma에 정리' },
+    ]
+  },
+  {
+    items: [
+      { dot:'b', strong:'매핑 테이블', text:'— 현재 아이콘명 → 새 라이브러리 아이콘명 1:1 대응표 작성' },
+      { dot:'b', strong:'단계적 교체', text:'— 사용 빈도 높은 아이콘부터 (system_search, system_close 우선)' },
+      { dot:'a', strong:'컴포넌트 정리', text:'— JDS Core + BZW 중복 11개 단일 컴포넌트로 통합' },
+      { dot:'x', strong:'테스트', text:'— 교체 후 각 페이지 시각 회귀 테스트 진행' },
+      { dot:'g', strong:'완료 기준', text:'— 단일 라이브러리, 이름 일관성, Figma ↔ 코드 1:1 매핑 문서 완성' },
+    ]
+  }
+];
+
+let currentStep = 0;
+
+function selectStep(idx) {
+  currentStep = idx;
+  document.querySelectorAll('.step-card').forEach((c,i) => {
+    c.classList.toggle('active', i === idx);
+  });
+  const detail = document.getElementById('stepDetail');
+  detail.classList.add('visible');
+  const items = stepData[idx].items;
+  document.getElementById('detailItems').innerHTML = items.map(item => `
+    <div class="detail-item">
+      <div class="detail-dot dot-${item.dot}"></div>
+      <div><b>${item.strong}</b> <span>${item.text}</span></div>
+    </div>
+  `).join('');
+}
+
+selectStep(0);
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      e.target.querySelectorAll('.bar-fill[data-w]').forEach(bar => {
+        setTimeout(() => { bar.style.width = bar.dataset.w; }, 200);
+      });
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+document.querySelectorAll('.bar-fill[data-w]').forEach(bar => {
+  bar.style.width = '0%';
+});
+</script>
+</body>
+</html>
